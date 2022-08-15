@@ -3,19 +3,21 @@ import Axios from "axios"
 import "./Section.css"
 import  Carousel from '../Component/Carusel'
 import Kategory from '../Component/Kategory'
+import {useDispatch} from "react-redux"
 
 export default function Home() {
-
+ 
   const [arre,setArre]=useState([])
   const [select, setSelect]=useState([])
   const [d_none, setD_none]=useState()
+  const dispatch = useDispatch()
 
   useEffect(()=>{
     getStudent()
   }, [])
 
  function getStudent(){
-  Axios.get("http://myjson.dit.upm.es/api/bins/hbue")
+  Axios.get("http://myjson.dit.upm.es/api/bins/bktw")
     .then(ress=>{
       setArre(ress.data)
       setSelect(ress.data)
@@ -23,6 +25,7 @@ export default function Home() {
     .catch(err =>{
       console.log(err);
   })
+
   }
 
   const searchFun=(e)=>{
@@ -70,17 +73,18 @@ export default function Home() {
   }
 
   function addFun(e){
-    let massiv = []
-    let localDate = localStorage.getItem("massiv")
-    if(localDate){
-      massiv = JSON.parse(localDate)
-      massiv.push(e)
-      localStorage.setItem("massiv",JSON.stringify(massiv))
-    }else{
-      massiv.push(e)
-      localStorage.setItem("massiv",JSON.stringify(massiv))
-    }
-    
+    dispatch({type:"addItem",piload:e})
+
+    // let massiv = []
+    // let localDate = localStorage.getItem("massiv")
+    // if(localDate){
+    //   massiv = JSON.parse(localDate)
+    //   massiv.push(e)
+    //   localStorage.setItem("massiv",JSON.stringify(massiv))
+    // }else{
+    //   massiv.push(e)
+    //   localStorage.setItem("massiv",JSON.stringify(massiv))
+    // }
   }
   return (
     <div className='container'>

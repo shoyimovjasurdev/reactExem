@@ -1,23 +1,38 @@
 import './App.css';
-import { Outlet,useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import Navbar from "./Component/Navbar"
-import { useState } from 'react';
+import Home from "./Section/Home"
+import Korzinka from './Section/Karzinka';
+import {Routes,Route} from "react-router-dom"
 
 function App() {
   const nav = useNavigate
-  const [one, setOne] = useState(0)
+  const one = 0
+  
+
+
   if(one===0){
-    nav("/home")
+    nav("/")
   }
   
   return (
     <div className="App">
-     <Navbar/>
-     <Outlet/>
-     
+      <Navbar/>
+      <Routes>
+          <Route path="/" element={<Home/>}/>
+          <Route path="/korzinka" element={<Korzinka/>}/>
+      </Routes>
     </div>
     
   );
 }
 
 export default App;
+
+
+
+
+
+
+
+
